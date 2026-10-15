@@ -1,0 +1,243 @@
+/* Custom Alias Font definition for "Te Amo" as requested */
+@font-face {
+    font-family: "Te Amo";
+    src: local("Dancing Script"), local("Great Vibes"), local("Sacramento");
+}
+
+:root {
+    --letter-love: max-content;
+    --letter: linear-gradient(145deg, #fff8fa 0%, #ffe3eb 100%);
+    --envelope-bg: #2b103c;
+    --envelope-flap: #3a1550;
+    --envelope-accent: #ff2a6d;
+}
+
+/* REQUIRED CLASS STRUCTURE FROM SCREENSHOT SPECIFICATION */
+.Para_Ti {
+    position: absolute;
+    width: 90%;
+    font-size: 2rem;
+    font-family: "Te Amo";
+    height: var(--letter-love);
+    transform: translateX(-50%);
+    background: var(--letter);
+}
+
+body {
+    background-color: #0d0618;
+    color: #f1e6ff;
+    overflow-x: hidden;
+    user-select: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #150928;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff2a6d;
+    border-radius: 3px;
+}
+
+/* Glow Animations */
+.glow-text {
+    text-shadow: 0 0 12px rgba(255, 42, 109, 0.7), 0 0 24px rgba(255, 42, 109, 0.4);
+}
+
+.glow-box {
+    box-shadow: 0 0 25px rgba(255, 42, 109, 0.25), inset 0 0 15px rgba(255, 42, 109, 0.15);
+}
+
+/* 3D Envelope Styling */
+.envelope-wrapper {
+    perspective: 1200px;
+}
+
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    background-color: #240b36;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 42, 109, 0.3);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+@media (min-width: 640px) {
+    .envelope {
+        width: 440px;
+        height: 280px;
+    }
+}
+
+.envelope:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 42, 109, 0.5);
+}
+
+/* Flap animations */
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 130px solid #3d1457;
+    transform-origin: top;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s ease;
+    z-index: 4;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+
+@media (min-width: 640px) {
+    .flap {
+        border-left-width: 220px;
+        border-right-width: 220px;
+        border-top-width: 160px;
+    }
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+/* Pocket overlay inside envelope */
+.pocket {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid #280b3d;
+    border-right: 160px solid #280b3d;
+    border-bottom: 120px solid #330f4d;
+    border-top: 100px solid transparent;
+    border-radius: 0 0 16px 16px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+@media (min-width: 640px) {
+    .pocket {
+        border-left-width: 220px;
+        border-right-width: 220px;
+        border-bottom-width: 150px;
+        border-top-width: 130px;
+    }
+}
+
+/* Wax Seal */
+.wax-seal {
+    position: absolute;
+    top: 105px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #ff2a6d 0%, #990033 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 5;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+@media (min-width: 640px) {
+    .wax-seal {
+        top: 130px;
+        width: 64px;
+        height: 64px;
+        font-size: 1.7rem;
+    }
+}
+
+.envelope.open .wax-seal {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* The Paper inside envelope applying the specified .Para_Ti class */
+.letter-paper {
+    left: 50%;
+    top: 15px;
+    z-index: 2;
+    border-radius: 12px;
+    color: #2b1020;
+    padding: 1.75rem 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+    box-sizing: border-box;
+    opacity: 0.95;
+}
+
+@media (min-width: 640px) {
+    .letter-paper {
+        padding: 2.5rem 2rem;
+    }
+}
+
+/* Envelope open state for paper sliding out */
+.envelope.open .letter-paper {
+    top: -240px;
+    height: auto;
+    min-height: 480px;
+    z-index: 10;
+    box-shadow: 0 20px 50px rgba(255, 42, 109, 0.3), 0 0 20px rgba(0,0,0,0.5);
+    opacity: 1;
+}
+
+@media (min-width: 640px) {
+    .envelope.open .letter-paper {
+        top: -300px;
+        min-height: 520px;
+    }
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor::after {
+    content: '|';
+    animation: blink 0.8s infinite;
+    color: #ff2a6d;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Floating Animation */
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+.animate-float {
+    animation: floatSlow 5s ease-in-out infinite;
+}
+
+/* Pulse Heart */
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+}
+
+.heart-beat {
+    animation: heartBeat 2s infinite;
+}
