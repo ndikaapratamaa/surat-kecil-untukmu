@@ -1,5 +1,3 @@
-# 💌 Surat Kecil Untukmu
-
 Surat cinta interaktif berbasis web. Tulis pesanmu, kirim, lalu buka amplopnya dan lihat apa jawabannya.
 
 ## ✨ Fitur
