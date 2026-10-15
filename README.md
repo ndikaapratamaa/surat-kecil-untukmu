@@ -10,28 +10,7 @@ Surat cinta interaktif berbasis web. Tulis pesanmu, kirim, lalu buka amplopnya d
 - Form personalisasi: nama penerima, nama pengirim, pertanyaan, dan isi surat
 - Tampilan responsif untuk HP maupun desktop
 - Tombol Bagikan (masih dalam perbaikan 🚧)
-
-## 🚀 Cara Menjalankan
-
-Tidak perlu install apa pun.
-
-```bash
-git clone https://github.com/USERNAME/surat_Kecil_Untukmu.git
-cd surat_Kecil_Untukmu
-```
-
-Lalu buka `index.html` di browser. Atau pakai server lokal:
-
-```bash
-npx serve
-# atau
-python -m http.server 8000
-```
-
-> Butuh koneksi internet karena Tailwind CSS, Google Fonts, Font Awesome, dan Canvas Confetti dimuat lewat CDN.
-
 ## 📁 Struktur File
-
 ```
 surat_Kecil_Untukmu/
 ├── index.html           # Struktur halaman
