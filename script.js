@@ -234,6 +234,7 @@ Terima kasih telah membawa begitu banyak warna ke dalam hidupku! ✨`,
             if (!state.isOpen) {
                 state.isOpen = true;
                 envelope.classList.add('open');
+                syncEnvelopeSpace();
                 playOpenSound();
 
                 if (state.useRandomMessage) {
@@ -251,10 +252,25 @@ Terima kasih telah membawa begitu banyak warna ke dalam hidupku! ✨`,
             }
         });
 
+        // Kertas yang terbuka menjulur ke bawah amplop; sisakan ruang agar tidak menimpa footer
+        const envelopeWrapper = document.querySelector('.envelope-wrapper');
+        function syncEnvelopeSpace() {
+            if (!state.isOpen) {
+                envelopeWrapper.style.marginBottom = '';
+                return;
+            }
+            const openTop = window.innerWidth >= 640 ? -300 : -240;   // sama dengan CSS .envelope.open .letter-paper
+            const overflow = openTop + letterPaper.offsetHeight - envelope.offsetHeight;
+            envelopeWrapper.style.marginBottom = overflow > 0 ? `${Math.ceil(overflow + 32)}px` : '';
+        }
+        new ResizeObserver(syncEnvelopeSpace).observe(letterPaper);
+        window.addEventListener('resize', syncEnvelopeSpace);
+
         function resetLetter() {
             state.isOpen = false;
             clearTimeout(typingTimeout);
             envelope.classList.remove('open');
+            syncEnvelopeSpace();
             typewriterBox.textContent = '';
             letterFooter.style.opacity = '0';
             resetNoButton();
